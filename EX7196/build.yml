@@ -1,0 +1,29 @@
+name: C++ Build (hello.cpp)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Kód letöltése
+    - uses: actions/checkout@v4
+
+    # 2. g++ telepítése (ahogy kérted)
+    - name: Install g++
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++
+
+    # 3. Fordítás (hello.cpp -> hello)
+    - name: Compile hello.cpp
+      run: g++ src/hello.cpp -o hello
+
+    # 4. Futtatás tesztelésként
+    - name: Run program
+      run: ./hello
